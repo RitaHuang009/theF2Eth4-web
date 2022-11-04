@@ -1,17 +1,21 @@
+"use strict";
+
 $(document).ready(function () {
   // 重新載入此頁面時，回到第一張圖，並將右方導覽列置中
   $("body, html").scrollTop(0);
   center();
+  var numberOfListItem = $(".nav li").length;
+  var currentItem = 1;
+  var isMoving = 0; // 滑鼠滾輪捲動時，移動圖片
 
-  let numberOfListItem = $(".nav li").length;
-  let currentItem = 1;
-  let isMoving = 0;
+  $(window).mousewheel(debounce(function (e) {
+    return scrollToCurrentItem(e);
+  }, 100, true));
 
-  // 滑鼠滾輪捲動時，移動圖片
-  $(window).mousewheel(debounce((e) => scrollToCurrentItem(e), 100, true));
   function scrollToCurrentItem(e) {
     if (isMoving === 0) {
       isMoving = 1;
+
       if (e.deltaY < 0) {
         if (currentItem < numberOfListItem) {
           currentItem++;
@@ -23,19 +27,12 @@ $(document).ready(function () {
       }
     }
 
-    $("html, body")
-      .stop()
-      .animate(
-        {
-          scrollTop: $(".p0" + currentItem).offset().top
-        },
-        function () {
-          isMoving = 0;
-        }
-      );
-  }
-
-  //  點選右方導覽列時會到指定圖片
+    $("html, body").stop().animate({
+      scrollTop: $(".p0" + currentItem).offset().top
+    }, function () {
+      isMoving = 0;
+    });
+  } //  點選右方導覽列時會到指定圖片
   // for (var i = 0; i <= numberOfListItem; i++) {
   //   $(".nav li:eq(" + i + ")").click({ id: i }, function (e) {
   //     $(".nav li").removeClass("active");
@@ -47,19 +44,17 @@ $(document).ready(function () {
   //     currentItem = e.data.id + 1;
   //   });
   // }
-
   //  縮放網頁時，重新將導覽列置中
+
+
   $(window).resize(function () {
     center();
-  });
+  }); //  計算導覽列垂直置中的高度
 
-  //  計算導覽列垂直置中的高度
   function center() {
     var pos = $(window).height() / 2 - $(".nav").height() / 2;
     $(".nav").css("top", pos);
-  }
-
-  // 監控 window scroll 事件，用來改變右方導覽列 active 的項目
+  } // 監控 window scroll 事件，用來改變右方導覽列 active 的項目
   // $(window).scroll(function () {
   //   console.log("scroll", $(window).scrollTop());
   //   if (
@@ -92,8 +87,8 @@ $(document).ready(function () {
   //     $(".nav li:eq(4)").addClass("active");
   //   }
   // });
-});
 
+});
 /**
  * 將要 debounce 的函式代入 func 中，不用 invoke
  * wait，設定時間（毫秒）
@@ -101,18 +96,22 @@ $(document).ready(function () {
  * 但事件結束時不會執行；如果是 false 則事件觸發時不會立即執行，
  * 但事件結束時會執行。
  **/
+
 function debounce(func, wait, immediate) {
   var timeout;
   return function () {
     var context = this,
-      args = arguments;
-    var later = function () {
+        args = arguments;
+
+    var later = function later() {
       timeout = null;
       if (!immediate) func.apply(context, args);
     };
+
     var callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
 }
+//# sourceMappingURL=all.js.map
