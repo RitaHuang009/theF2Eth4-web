@@ -1,0 +1,108 @@
+/*    插入背景圖片    */
+.p01 {
+    height: 100vh;
+    position: relative;
+}
+
+
+
+.bg-main {
+    background: radial-gradient(64.25% 64.25% at 50% 50%, #010b63 0.03%, #01033d 59.94%, #020128 100%);
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.neno-txt {
+    color: #070941;
+    -webkit-text-stroke: 2px #eefbff;
+    text-shadow: 0 0px 5px #fff, 0 0px 8px #eefbff;
+    font-family: 'Kosugi Maru';
+}
+
+.neno-svg {
+    position: relative;
+}
+
+
+.neno-svg-light {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    opacity: 0;
+    animation-name: nenoLight;
+    animation-iteration-count:infinite;
+    animation-duration: 2s;
+    animation-delay: 0.5s;
+    animation-direction:alternate;
+    z-index: 1;
+}
+
+@keyframes nenoLight{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.neno-svg-default {
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+
+
+.p02 {
+    background-image: url(https://placeimg.com/1000/1000/arch);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.p03 {
+    background-image: url(https://placeimg.com/1000/1000/nature);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.p04 {
+    background-image: url(https://placeimg.com/1000/1000/people);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.p05 {
+    background-image: url(https://placeimg.com/1000/1000/tech);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+/*    插入導覽列     */
+.nav {
+    position: fixed;
+    top: 50%;
+    right: 0px;
+    cursor: pointer;
+    display: none;
+}
+li {
+    width: 10px;
+    height: 10px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5) inset, -1px -1px 1px rgba(0, 0, 0, 0.5) inset;
+    list-style-type: none;
+}
+h1 {
+    font-size: 60px;
+    color: ghostwhite;
+    // text-shadow: 0px 0px 15px black;
+}
